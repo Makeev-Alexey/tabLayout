@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,14 +43,16 @@ class BlankFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view: View? = inflater!!.inflate(R.layout.layout, container, false)
-
-        rel_main=view?.findViewById<RelativeLayout>(R.id.rel_main) as RelativeLayout
-        rel_main?.setBackgroundColor(Color.CYAN)
-        tv_name = view?.findViewById<TextView>(R.id.tv_name) as TextView
-        tv_name?.text = "W3Adda First Tab"
-
-
+        var view: View? = inflater!!.inflate(R.layout.fragment_blank, container, false)
+        var list = mutableListOf<Cat>(Cat("barsik", 10), Cat("murzik", 10), Cat("bar", 10), Cat("bars", 10))
+        var recyclerview = view?.findViewById<RecyclerView>(R.id.recyclerview)
+        var catAdapter = CatAdapter(list)
+        if (recyclerview != null) {
+            recyclerview.adapter = catAdapter
+        }
+        if (recyclerview != null) {
+            recyclerview.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        }
         return view
     }
 
